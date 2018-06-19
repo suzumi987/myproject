@@ -14,9 +14,9 @@ var Order = mongoose.model('order');
 //   })
 // });
 
-router.get('/:id', function (req, res, next) {
+router.get('/', function (req, res, next) {
   // res.send(req.query.id);
-  Order.findById(req.params.id,{"orderid":req.params.id}).exec( function(err,el){
+  Order.findById(req.query.id).exec( function(err,el){
   console.log("complete!");
   console.log(el);
   return res.json(el);
