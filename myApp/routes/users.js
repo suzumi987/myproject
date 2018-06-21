@@ -14,27 +14,26 @@ var Order = mongoose.model('order');
 //   })
 // });
 
-router.get('/', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
   // res.send(req.query.id);
-  Order.findById(req.query.id).exec( function(err,el){
+  console.log(req.query)
+  Order.find(req.query).exec( function(err,el){
   console.log("complete!");
   console.log(el);
   return res.json(el);
-  // res.send(el);
+
 })
 });
 
 router.post('/', function (req, res, next) {
   var names = req.body.requestHeader.orderId;
-  Order.create({orderId:names,age:100
-  
-  })
+  Order.create(req.body.requestHeader)
     res.send("Complete!");
   
 });
 
 router.put('/:id', function (req, res, next) {
-  Order.findByIdAndUpdate(req.params.id,{"orderId":"pokpak"} ,function(err,el){
+  Order.findByIdAndUpdate(req.params.id,req.body.requestHeader ,function(err,el){
     console.log(el);
     return res.json(el);
   });
